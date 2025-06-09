@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "842174780794",
-    "firebase_url": "https://flutterapitest123-e4e6a-default-rtdb.firebaseio.com",
-    "project_id": "flutterapitest123-e4e6a",
-    "storage_bucket": "flutterapitest123-e4e6a.firebasestorage.app"
+    "project_number": "808161283754",
+    "project_id": "fir-test02-ee497",
+    "storage_bucket": "fir-test02-ee497.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:842174780794:android:007320e9474dc03903f2c3",
+        "mobilesdk_app_id": "1:808161283754:android:946d3ba015405563494ad3",
         "android_client_info": {
           "package_name": "com.mychatapps.mychat"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA26EMp3635qzY7edzqfH4mvPkzaryBJh8"
+          "current_key": "AIzaSyCuFRPS2I_J0dQdJlSUEQn5RpKOokC2PnE"
         }
       ],
       "services": {
