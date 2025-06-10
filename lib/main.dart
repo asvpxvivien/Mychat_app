@@ -4,8 +4,25 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MyApp());
+
+  try {
+    final alreadyInitialized = Firebase.apps.any(
+      (app) => app.name == '[DEFAULT]',
+    );
+    if (!alreadyInitialized) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+  } on FirebaseException catch (e) {
+    if (e.code == 'duplicate-app') {
+      print("⚠️ Firebase app '[DEFAULT]' already initialized. Skipping.");
+    } else {
+      rethrow;
+    }
+  }
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
