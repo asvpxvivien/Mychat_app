@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mychat/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,7 +16,19 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Column(
         children: [
           Text("Don't have an account"),
-          ElevatedButton(onPressed: () {}, child: Text("Signup Now")),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SignupScreen();
+                  },
+                ),
+              );
+            },
+            child: Text("Signup Now"),
+          ),
         ],
       ),
     );
