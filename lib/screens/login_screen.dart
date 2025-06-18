@@ -10,6 +10,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Login")));
+    return Scaffold(
+      appBar: AppBar(title: Text("Login")),
+      body: Column(
+        children: [
+          Text("Don't have an account"),
+          ElevatedButton(onPressed: () {}, child: Text("Signup Now")),
+        ],
+      ),
+    );
   }
 }
