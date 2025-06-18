@@ -15,7 +15,16 @@ class _SignupScreenState extends State<SignupScreen> {
       body: Column(
         children: [
           TextField(decoration: InputDecoration(label: Text("Email"))),
-          TextField(decoration: InputDecoration(label: Text("Password"))),
+          SizedBox(height: 20),
+          TextField(
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            decoration: InputDecoration(label: Text("Password")),
+          ),
+          SizedBox(height: 20),
+
+          ElevatedButton(onPressed: () {}, child: Text("Create account")),
         ],
       ),
     );
