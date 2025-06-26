@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/controllers/login_controller.dart';
@@ -67,6 +66,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
                 child: Text("Login"),
+              ),
+              SizedBox(width: 20),
+              Row(
+                children: [
+                  Text("Don't have any account"),
+                  SizedBox(width: 10),
+                  Text(
+                    "Signup here",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ],
           ),
