@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mychat/controllers/login_controller.dart';
 import 'package:mychat/controllers/signup_controller.dart';
 import 'package:mychat/screens/dashboard_screen.dart';
 
@@ -58,14 +59,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   if (userForm.currentState!.validate()) {
                     //creating an account
-                    SignupController.createAccount(
+                    LoginController.login(
                       context: context,
                       email: email.text,
                       password: password.text,
                     );
                   }
                 },
-                child: Text("Create account"),
+                child: Text("Login"),
               ),
             ],
           ),
