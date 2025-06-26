@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/controllers/signup_controller.dart';
@@ -20,13 +18,18 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Signup")),
+      appBar: AppBar(title: Text("")),
       body: Form(
         key: userForm,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: Image.asset("assets/images/logo.png"),
+              ),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: email,
@@ -54,18 +57,29 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 23),
 
-              ElevatedButton(
-                onPressed: () {
-                  if (userForm.currentState!.validate()) {
-                    //creating an account
-                    SignupController.createAccount(
-                      context: context,
-                      email: email.text,
-                      password: password.text,
-                    );
-                  }
-                },
-                child: Text("Create account"),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(0, 50),
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.deepPurpleAccent,
+                      ),
+                      onPressed: () {
+                        if (userForm.currentState!.validate()) {
+                          //creating an account
+                          SignupController.createAccount(
+                            context: context,
+                            email: email.text,
+                            password: password.text,
+                          );
+                        }
+                      },
+                      child: Text("Create account"),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
