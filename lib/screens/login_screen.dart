@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (value == null || value.isEmpty) {
                     return "Email is required";
                   }
+                  return null;
                 },
                 decoration: InputDecoration(label: Text("Email")),
               ),
@@ -52,6 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (value == null || value.isEmpty) {
                     return "Password is required";
                   }
+                  return null;
                 },
 
                 obscureText: true,
