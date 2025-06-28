@@ -14,6 +14,8 @@ class _SignupScreenState extends State<SignupScreen> {
   var userForm = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController country = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,30 @@ class _SignupScreenState extends State<SignupScreen> {
                 decoration: InputDecoration(label: Text("Password")),
               ),
               SizedBox(height: 23),
+              TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: email,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Name is required";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(label: Text("Name")),
+              ),
+              SizedBox(height: 23),
 
+              //        TextFormField(
+              //   autovalidateMode: AutovalidateMode.onUserInteraction,
+              //   controller: email,
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return "Email is required";
+              //     }
+              //     return null;
+              //   },
+              //   decoration: InputDecoration(label: Text("Email")),
+              // ),
               Row(
                 children: [
                   Expanded(
