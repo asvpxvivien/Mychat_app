@@ -7,6 +7,8 @@ class SignupController {
     required BuildContext context,
     required String email,
     required String password,
+    required String name,
+    required String country,
   }) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(

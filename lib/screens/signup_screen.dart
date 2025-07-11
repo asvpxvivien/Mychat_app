@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/controllers/signup_controller.dart';
-import 'package:mychat/screens/dashboard_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -60,9 +58,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 decoration: InputDecoration(label: Text("Password")),
               ),
               SizedBox(height: 23),
+
+              SizedBox(height: 23),
+
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                controller: email,
+                controller: name,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Name is required";
@@ -73,17 +74,18 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 23),
 
-              //        TextFormField(
-              //   autovalidateMode: AutovalidateMode.onUserInteraction,
-              //   controller: email,
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return "Email is required";
-              //     }
-              //     return null;
-              //   },
-              //   decoration: InputDecoration(label: Text("Email")),
-              // ),
+              TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: country,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Country is required";
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(label: Text("Country")),
+              ),
+              SizedBox(height: 23),
               Row(
                 children: [
                   Expanded(
@@ -100,6 +102,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             context: context,
                             email: email.text,
                             password: password.text,
+                            name: name.text,
+                            country: country.text,
                           );
                         }
                       },
