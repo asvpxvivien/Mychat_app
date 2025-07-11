@@ -25,11 +25,10 @@ class SignupController {
 
       print("Account created successfully");
     } catch (e) {
-      SnackBar messageSnackBar = SnackBar(
-        backgroundColor: Colors.red,
-        content: Text(e.toString()),
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(backgroundColor: Colors.red, content: Text(e.toString())),
       );
-      ScaffoldMessenger.of(context).showSnackBar(messageSnackBar);
       print(e);
     }
   }
