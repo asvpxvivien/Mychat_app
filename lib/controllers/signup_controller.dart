@@ -19,6 +19,20 @@ class SignupController {
 
       var userId = FirebaseAuth.instance.currentUser!.uid;
 
+      var db = FirebaseFirestore.instance;
+      Map<String, dynamic> data = {
+        "name": name,
+        "country": country,
+        "email": email,
+        "Id": userId.toString(),
+      };
+
+      try {
+        await db.collection("users").doc(userId.toString()).set(data);
+      } catch (e) {
+        print(e);
+      }
+
       if (!context.mounted) return; //stop tout si le widget est monté
 
       Navigator.pushAndRemoveUntil(
