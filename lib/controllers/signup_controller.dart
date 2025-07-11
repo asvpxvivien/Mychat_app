@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mychat/screens/dashboard_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupController {
   static Future<void> createAccount({
@@ -15,6 +16,9 @@ class SignupController {
         email: email,
         password: password,
       );
+
+      var userId = FirebaseAuth.instance.currentUser!.uid;
+
       if (!context.mounted) return; //stop tout si le widget est monté
 
       Navigator.pushAndRemoveUntil(
