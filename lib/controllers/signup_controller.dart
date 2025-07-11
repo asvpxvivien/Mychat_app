@@ -15,17 +15,12 @@ class SignupController {
         email: email,
         password: password,
       );
+      if (!context.mounted) return; //stop tout si le widget est monté
 
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-          builder: (context) {
-            return DashboardScreen();
-          },
-        ),
-        (route) {
-          return false;
-        },
+        MaterialPageRoute(builder: (context) => DashboardScreen()),
+        (route) => false,
       );
 
       print("Account created successfully");
