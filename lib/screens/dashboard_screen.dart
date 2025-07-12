@@ -15,7 +15,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Dashboard")),
+      appBar: AppBar(title: Text("Global Chat")),
+      drawer: Drawer(
+        child: Container(
+          child: Column(
+            children: [
+              ListTile(leading: Icon(Icons.logout), title: Text("Logout")),
+            ],
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Text("Welcome"),
