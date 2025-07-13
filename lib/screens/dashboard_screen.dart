@@ -20,7 +20,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Container(
           child: Column(
             children: [
-              ListTile(leading: Icon(Icons.logout), title: Text("Logout")),
+              SizedBox(height: 50),
+
+              ListTile(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SplashScreen();
+                      },
+                    ),
+                    (route) {
+                      return false;
+                    },
+                  );
+                },
+
+                leading: Icon(Icons.people),
+                title: Text("Profile"),
+              ),
+              ListTile(
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SplashScreen();
+                      },
+                    ),
+                    (route) {
+                      return false;
+                    },
+                  );
+                },
+
+                leading: Icon(Icons.logout),
+                title: Text("Logout"),
+              ),
             ],
           ),
         ),
@@ -32,18 +71,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ElevatedButton(
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
-
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return SplashScreen();
-                  },
-                ),
-                (route) {
-                  return false;
-                },
-              );
             },
             child: Text("Logout"),
           ),
