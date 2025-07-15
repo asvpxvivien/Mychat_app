@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mychat/providers/userProvider.dart';
 import 'package:mychat/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +27,13 @@ Future<void> main() async {
     }
   }
 
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider
+  create: (context){
+return UserProvider();
+  }
+
+
+  child: const MyApp());
 }
 
 class MyApp extends StatefulWidget {
