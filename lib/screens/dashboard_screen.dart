@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mychat/screens/profile_screen.dart';
 import 'package:mychat/screens/splash_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -43,36 +44,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               ListTile(
                 onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return SplashScreen();
+                        return ProfileScreen();
                       },
                     ),
-                    (route) {
-                      return false;
-                    },
-                  );
-                },
-
-                leading: Icon(Icons.remove_circle),
-                title: Text("Profile"),
-              ),
-              ListTile(
-                onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SplashScreen();
-                      },
-                    ),
-                    (route) {
-                      return false;
-                    },
                   );
                 },
 
