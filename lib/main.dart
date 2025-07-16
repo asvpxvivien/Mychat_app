@@ -33,7 +33,7 @@ return UserProvider();
   }
 
 
-  child: const MyApp());
+  child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
