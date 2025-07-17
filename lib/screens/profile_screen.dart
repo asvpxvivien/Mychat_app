@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mychat/providers/userProvider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -29,13 +31,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text("Profile")),
       body: Column(
         children: [
-          Text(userData?["name"] ?? ""),
-          Text(userData?["country"] ?? ""),
-          Text(userData?["email"] ?? ""),
+          Text(userProvider.userName),
+          Text(userProvider.userId),
+          Text(userProvider.userEmail),
         ],
       ),
     );

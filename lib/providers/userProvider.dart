@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 
-
-
-
-
-Class UserProvider extends ChangeNotifier; {
-
+class UserProvider extends ChangeNotifier {
   String userName = "";
   String userEmail = "";
   String userId = "";
-
-
 }

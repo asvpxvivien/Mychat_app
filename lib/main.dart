@@ -6,7 +6,6 @@ import 'package:mychat/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,13 +26,9 @@ Future<void> main() async {
     }
   }
 
-  runApp(ChangeNotifierProvider
-  create: (context){
-return UserProvider();
-  }
-
-
-  child: const MyApp()));
+  runApp(
+    ChangeNotifierProvider(create: (context) => UserProvider(), child: MyApp()),
+  );
 }
 
 class MyApp extends StatefulWidget {
