@@ -65,12 +65,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           Text("Welcome"),
           Text((user?.email ?? "").toString()),
-          ElevatedButton(
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-            },
-            child: Text("Logout"),
-          ),
+          // ElevatedButton(
+          //   onPressed: () async {
+          //     await FirebaseAuth.instance.signOut();
+          //   },
+          //   child: Text("Logout"),
+          // ),
         ],
       ),
     );

@@ -49,7 +49,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: password,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Password is required";
+                        return "Please your Password is required";
                       }
                       return null;
                     },
@@ -68,7 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: name,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Name is required";
+                        return "Please your Name is required";
                       }
                       return null;
                     },
@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: country,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Country is required";
+                        return "Please your Country is required";
                       }
                       return null;
                     },
