@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/screens/profile_screen.dart';
 import 'package:mychat/screens/splash_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -12,6 +13,25 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   var user = FirebaseAuth.instance.currentUser;
+  var db = FirebaseFirestore.instance;
+
+  List<Map<String, dynamic>> chatroomsList = [];
+
+  void getChatrooms() {
+    db.collection("chatrooms").get().then((dataSnapshot) {
+      for (var singleChatroomData in dataSnapshot.docs) {
+        chatroomsList.add(singleChatroomData.data());
+      }
+
+      setState(() {});
+    });
+  }
+
+  @override
+  void initState() {
+    getChatrooms();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +72,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Text("Welcome"),
-          Text((user?.email ?? "").toString()),
-          // ElevatedButton(
-          //   onPressed: () async {
-          //     await FirebaseAuth.instance.signOut();
-          //   },
-          //   child: Text("Logout"),
-          // ),
-        ],
+      body: ListView.builder(
+        itemCount: chatroomsList.length,
+        itemBuilder: (BuildContext context, int index) {
+          String chatroomName = chatroomsList[index]["chatroom_name"] ?? "";
+
+          return ListTile(
+            leading: CircleAvatar(child: Text(chatroomName[0])),
+            title: Text(chatroomName),
+
+            subtitle: Text(chatroomsList[index]["desc"] ?? ""),
+          );
+        },
       ),
     );
   }
