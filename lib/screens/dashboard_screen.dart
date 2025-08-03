@@ -25,32 +25,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
               ListTile(
                 onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SplashScreen();
-                      },
-                    ),
-                    (route) {
-                      return false;
-                    },
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
                   );
                 },
 
                 leading: Icon(Icons.people),
                 title: Text("Profile"),
               ),
+
               ListTile(
                 onTap: () async {
-                  Navigator.push(
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProfileScreen();
-                      },
-                    ),
+                    MaterialPageRoute(builder: (context) => SplashScreen()),
+                    (route) => false,
                   );
                 },
 
