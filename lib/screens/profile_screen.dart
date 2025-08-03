@@ -13,21 +13,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   Map<String, dynamic>? userData = {};
-  var db = FirebaseFirestore.instance;
-  var authUser = FirebaseAuth.instance.currentUser;
-
-  void getData() {
-    db.collection("users").doc(authUser!.uid).get().then((dataSnapshot) {
-      userData = dataSnapshot.data();
-      setState(() {});
-    });
-  }
-
-  @override
-  void initState() {
-    getData();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
