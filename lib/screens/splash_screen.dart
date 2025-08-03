@@ -15,6 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    super.initState();
+    final user = FirebaseAuth.instance.currentUser;
     // check for user login status..
     Future.delayed(Duration(seconds: 2), () {
       if (user == null) {
@@ -23,8 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
         openDashboard();
       }
     });
-    // TODO: implement initState
-    super.initState();
   }
 
   void openDashboard() {
