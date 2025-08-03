@@ -42,7 +42,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: Column(
             children: [
               SizedBox(height: 50),
+              ListTile(
+                onTap: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()),
+                  );
+                },
 
+                leading: Icon(Icons.people),
+                title: Text("Profile"),
+              ),
               ListTile(
                 onTap: () async {
                   Navigator.push(
