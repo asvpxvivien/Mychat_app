@@ -4,38 +4,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/providers/userProvider.dart';
 import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   Map<String, dynamic>? userData = {};
 
   @override
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: Text("")),
+      appBar: AppBar(title: Text("Edit Profile")),
       body: Container(
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(radius: 50, child: Text(userProvider.userName[0])),
-            Text(userProvider.userName),
-            SizedBox(height: 8),
-            Text(
-              userProvider.userName,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(userProvider.userEmail),
-
-            ElevatedButton(onPressed: () {}, child: Text("Edit Profile")),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextField(decoration: InputDecoration(label: Text("Name"))),
+            ],
+          ),
         ),
       ),
     );

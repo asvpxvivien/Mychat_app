@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/providers/userProvider.dart';
-import 'package:mychat/screens/dashboard_screen.dart';
+import 'package:mychat/screens/edit_profile_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -37,11 +37,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return DashboardScreen();
+                      return EditProfileScreen();
                     },
                   ),
                 );
