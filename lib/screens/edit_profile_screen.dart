@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/providers/userProvider.dart';
-import 'package:mychat/screens/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -35,19 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(height: 8),
             Text(userProvider.userEmail),
 
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return DashboardScreen();
-                    },
-                  ),
-                );
-              },
-              child: Text("Edit Profile"),
-            ),
+            ElevatedButton(onPressed: () {}, child: Text("Edit Profile")),
           ],
         ),
       ),
