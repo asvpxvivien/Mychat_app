@@ -11,11 +11,23 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> getUserDetails() async {
     var authUser = FirebaseAuth.instance.currentUser;
-    db.collection("users").doc(authUser!.uid).get().then((dataSnapshot) {
-      userName = dataSnapshot.data()?["name"] ?? "";
-      userEmail = dataSnapshot.data()?["email"] ?? "";
-      userId = dataSnapshot.data()?["id"] ?? "";
-      notifyListeners();
-    });
+    if (authUser == null) return;
+
+    try {
+      var docSnapshot = await db.collection("users").doc(authUser.uid).get();
+
+      if (docSnapshot.exists) {
+        var data = docSnapshot.data();
+        userName = data?["name"] ?? "";
+        userEmail = data?["email"] ?? "";
+        userId =
+            docSnapshot.id; // 🔥 L’ID est ici, pas dans les champs Firestore
+        notifyListeners();
+      } else {
+        print("Aucun utilisateur trouvé avec cet ID.");
+      }
+    } catch (e) {
+      print("Erreur lors de la récupération des données utilisateur : $e");
+    }
   }
 }
