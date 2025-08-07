@@ -8,9 +8,9 @@ class UserProvider extends ChangeNotifier {
   String userId = "Dummy userId";
 
   var db = FirebaseFirestore.instance;
-  var authUser = FirebaseAuth.instance.currentUser;
 
   Future<void> getUserDetails() async {
+    var authUser = FirebaseAuth.instance.currentUser;
     db.collection("users").doc(authUser!.uid).get().then((dataSnapshot) {
       userName = dataSnapshot.data()?["name"] ?? "";
       userEmail = dataSnapshot.data()?["email"] ?? "";
