@@ -33,6 +33,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         .collection("users")
         .doc(Provider.of<UserProvider>(context, listen: false).userId)
         .update(dataToUpdate);
+
+    Provider.of<UserProvider>(context, listen: false).getUserDetails();
+
+    Navigator.pop(context);
   }
 
   @override

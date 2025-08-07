@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mychat/screens/dashboard_screen.dart';
+import 'package:mychat/screens/splash_screen.dart';
 
 class LoginController {
   static Future<void> login({
@@ -18,7 +19,7 @@ class LoginController {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return DashboardScreen();
+            return SplashScreen();
           },
         ),
         (route) {
