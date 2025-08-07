@@ -11,13 +11,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   var userForm = GlobalKey<FormState>();
+
+  bool isLoading = false;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text("Login")),
       body: Form(
         key: userForm,
         child: Padding(
@@ -30,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 100,
                 child: Image.asset("assets/images/logo.png"),
               ),
-
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: email,
@@ -40,9 +40,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                   return null;
                 },
-                decoration: InputDecoration(label: Text("Email")),
+                decoration: const InputDecoration(label: Text("Email")),
               ),
-              SizedBox(height: 23),
+              const SizedBox(height: 23),
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: password,
@@ -52,55 +52,62 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                   return null;
                 },
-
                 obscureText: true,
                 enableSuggestions: false,
                 autocorrect: false,
-                decoration: InputDecoration(label: Text("Password")),
+                decoration: const InputDecoration(label: Text("Password")),
               ),
-              SizedBox(height: 23),
-
+              const SizedBox(height: 23),
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(0, 50),
+                        minimumSize: const Size(0, 50),
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.deepPurpleAccent,
                       ),
                       onPressed: () {
                         if (userForm.currentState!.validate()) {
-                          //creating an account
+                          setState(() => isLoading = true);
                           LoginController.login(
                             context: context,
                             email: email.text,
                             password: password.text,
-                          );
+                          ).then((_) {
+                            setState(() => isLoading = false);
+                          });
                         }
                       },
-                      child: Text("Login"),
+                      child:
+                          isLoading
+                              ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: const CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                              : Text("Login"),
                     ),
                   ),
                 ],
               ),
-              SizedBox(width: 20),
+              const SizedBox(height: 20),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have any account"),
-                  SizedBox(width: 5),
+                  const Text("Don't have any account?"),
+                  const SizedBox(width: 5),
                   InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
-                            return SignupScreen();
-                          },
+                          builder: (context) => const SignupScreen(),
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Signup here",
                       style: TextStyle(
                         color: Colors.blue,

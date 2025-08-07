@@ -10,6 +10,7 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   var userForm = GlobalKey<FormState>();
+  bool isLoading = false;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController name = TextEditingController();
@@ -97,10 +98,12 @@ class _SignupScreenState extends State<SignupScreen> {
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.deepPurpleAccent,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             if (userForm.currentState!.validate()) {
+                              isLoading = true;
+                              setState(() {});
                               //creating an account
-                              SignupController.createAccount(
+                              await SignupController.createAccount(
                                 context: context,
                                 email: email.text,
                                 password: password.text,
@@ -108,8 +111,18 @@ class _SignupScreenState extends State<SignupScreen> {
                                 country: country.text,
                               );
                             }
+                            isLoading = false;
+                            setState(() {});
                           },
-                          child: Text("Create account"),
+                          child:
+                              isLoading
+                                  ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                  : Text("Create account"),
                         ),
                       ),
                     ],
