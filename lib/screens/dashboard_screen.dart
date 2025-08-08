@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/providers/userProvider.dart';
+import 'package:mychat/screens/chatroom_screen.dart';
 import 'package:mychat/screens/profile_screen.dart';
 import 'package:mychat/screens/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -113,6 +114,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           String chatroomName = chatroomsList[index]["chatroom_name"] ?? "";
 
           return ListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChatroomScreen()),
+              );
+            },
             leading: CircleAvatar(
               backgroundColor: Colors.blueGrey[900],
               child: Text(
