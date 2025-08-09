@@ -17,6 +17,23 @@ class ChatroomScreen extends StatefulWidget {
 class _ChatroomScreenState extends State<ChatroomScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text(widget.ChatroomName)));
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.ChatroomName)),
+
+      body: Column(
+        children: [
+          Expanded(child: Container(color: Colors.red)),
+
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [Expanded(child: TextField()), Icon(Icons.send)],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -123,7 +123,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   builder:
                       (context) => ChatroomScreen(
                         ChatroomName: chatroomName,
-                        ChatroomId: chatroomsList[index]["chatroom_id"] ?? "",
+                        ChatroomId: chatroomsIds[index],
                       ),
                 ),
               );
