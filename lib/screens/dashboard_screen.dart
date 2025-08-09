@@ -20,11 +20,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
   var scoffoldKey = GlobalKey<ScaffoldState>();
 
   List<Map<String, dynamic>> chatroomsList = [];
+  List<String> chatroomsIds = [];
 
   void getChatrooms() {
     db.collection("chatrooms").get().then((dataSnapshot) {
       for (var singleChatroomData in dataSnapshot.docs) {
         chatroomsList.add(singleChatroomData.data());
+        chatroomsIds.add(singleChatroomData.id.toString());
       }
 
       setState(() {});
@@ -117,7 +119,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ChatroomScreen()),
+                MaterialPageRoute(
+                  builder:
+                      (context) => ChatroomScreen(
+                        ChatroomName: chatroomName,
+                        ChatroomId: chatroomsIds[index],
+                      ),
+                ),
               );
             },
             leading: CircleAvatar(
