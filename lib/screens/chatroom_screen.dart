@@ -15,6 +15,8 @@ class ChatroomScreen extends StatefulWidget {
 }
 
 class _ChatroomScreenState extends State<ChatroomScreen> {
+  TextEditingController messageText = TextEditingController();
+  void sendMessage() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                       ),
                     ),
                   ),
-                  Icon(Icons.send),
+                  InkWell(onTap: sendMessage, child: Icon(Icons.send)),
                 ],
               ),
             ),
