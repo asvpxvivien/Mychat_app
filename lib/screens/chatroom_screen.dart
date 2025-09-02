@@ -20,14 +20,22 @@ class ChatroomScreen extends StatefulWidget {
 class _ChatroomScreenState extends State<ChatroomScreen> {
   var db = FirebaseFirestore.instance;
   TextEditingController messageText = TextEditingController();
-  void sendMessage() {
+  Future<void> sendMessage() async {
+    if (messageText.text.isEmpty) {
+      return;
+    }
+
     Map<String, dynamic> messageToSend = {
       "text": messageText.text,
-      "sender_name": Provider.of<UserProvider>(context).userName,
+      "sender_name": Provider.of<UserProvider>(context, listen: false).userName,
       "chatroom_id": widget.ChatroomId,
       "timestamp": FieldValue.serverTimestamp(),
     };
-    db.collection("messages").add(messageToSend);
+
+    try {
+      await db.collection("messages").add(messageToSend);
+    } catch (e) {}
+    messageText.text = "";
   }
 
   @override
