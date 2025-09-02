@@ -4,8 +4,8 @@ import 'package:mychat/providers/userProvider.dart';
 import 'package:provider/provider.dart';
 
 class ChatroomScreen extends StatefulWidget {
-  final String ChatroomName;
-  final String ChatroomId;
+  String ChatroomName;
+  String ChatroomId;
 
   ChatroomScreen({
     super.key,
@@ -18,9 +18,8 @@ class ChatroomScreen extends StatefulWidget {
 }
 
 class _ChatroomScreenState extends State<ChatroomScreen> {
-  final db = FirebaseFirestore.instance;
-  final TextEditingController messageText = TextEditingController();
-
+  var db = FirebaseFirestore.instance;
+  TextEditingController messageText = TextEditingController();
   Future<void> sendMessage() async {
     if (messageText.text.isEmpty) {
       return;
@@ -35,10 +34,8 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
 
     try {
       await db.collection("messages").add(messageToSend);
-    } catch (e) {
-      print("Erreur lors de l'envoi : $e");
-    }
-    messageText.clear();
+    } catch (e) {}
+    messageText.text = "";
   }
 
   @override
@@ -49,32 +46,31 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
       body: Column(
         children: [
           Expanded(
-            child: StreamBuilder<QuerySnapshot>(
+            child: StreamBuilder(
               stream:
                   db
                       .collection("messages")
-                      .where("chatroom_id", isEqualTo: widget.ChatroomId)
                       .orderBy("timestamp", descending: true)
                       .snapshots(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(child: Text("Aucun message pour l'instant"));
-                }
-
-                var allMessages = snapshot.data!.docs;
-
+                var allMessages = snapshot.data?.docs ?? [];
                 return ListView.builder(
                   reverse: true,
                   itemCount: allMessages.length,
                   itemBuilder: (BuildContext context, int index) {
-                    var message = allMessages[index];
-                    return ListTile(
-                      title: Text(message["sender_name"] ?? "Inconnu"),
-                      subtitle: Text(message["text"] ?? ""),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            allMessages[index]["sender_name"],
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(allMessages[index]["text"]),
+                          SizedBox(height: 8),
+                        ],
+                      ),
                     );
                   },
                 );
