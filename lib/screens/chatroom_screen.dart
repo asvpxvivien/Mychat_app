@@ -4,8 +4,8 @@ import 'package:mychat/providers/userProvider.dart';
 import 'package:provider/provider.dart';
 
 class ChatroomScreen extends StatefulWidget {
-  String ChatroomName;
-  String ChatroomId;
+  final String ChatroomName;
+  final String ChatroomId;
 
   ChatroomScreen({
     super.key,
@@ -18,8 +18,9 @@ class ChatroomScreen extends StatefulWidget {
 }
 
 class _ChatroomScreenState extends State<ChatroomScreen> {
-  var db = FirebaseFirestore.instance;
-  TextEditingController messageText = TextEditingController();
+  final db = FirebaseFirestore.instance;
+  final TextEditingController messageText = TextEditingController();
+
   Future<void> sendMessage() async {
     if (messageText.text.isEmpty) {
       return;
@@ -34,8 +35,10 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
 
     try {
       await db.collection("messages").add(messageToSend);
-    } catch (e) {}
-    messageText.text = "";
+    } catch (e) {
+      print("Erreur lors de l'envoi : $e");
+    }
+    messageText.clear();
   }
 
   @override
@@ -45,7 +48,39 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
 
       body: Column(
         children: [
-          Expanded(child: Container(color: Colors.white)),
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  db
+                      .collection("messages")
+                      .where("chatroom_id", isEqualTo: widget.ChatroomId)
+                      .orderBy("timestamp", descending: true)
+                      .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(child: Text("Aucun message pour l'instant"));
+                }
+
+                var allMessages = snapshot.data!.docs;
+
+                return ListView.builder(
+                  reverse: true,
+                  itemCount: allMessages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var message = allMessages[index];
+                    return ListTile(
+                      title: Text(message["sender_name"] ?? "Inconnu"),
+                      subtitle: Text(message["text"] ?? ""),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
 
           Container(
             color: Colors.grey[300],
@@ -55,6 +90,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: messageText,
                       decoration: InputDecoration(
                         hintText: "Type a message...",
                         border: InputBorder.none,
