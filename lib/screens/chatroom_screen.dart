@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mychat/providers/userProvider.dart';
+import 'package:provider/provider.dart';
 
 class ChatroomScreen extends StatefulWidget {
   String ChatroomName;
@@ -15,8 +18,18 @@ class ChatroomScreen extends StatefulWidget {
 }
 
 class _ChatroomScreenState extends State<ChatroomScreen> {
+  var db = FirebaseFirestore.instance;
   TextEditingController messageText = TextEditingController();
-  void sendMessage() {}
+  void sendMessage() {
+    Map<String, dynamic> messageToSend = {
+      "text": messageText.text,
+      "sender_name": Provider.of<UserProvider>(context).userName,
+      "chatroom_id": widget.ChatroomId,
+      "timestamp": FieldValue.serverTimestamp(),
+    };
+    db.collection("messages").add(messageToSend);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
