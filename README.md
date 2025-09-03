@@ -36,6 +36,11 @@ A modern and elegant messaging application built with Flutter and Firebase, offe
  **Web**
  **Desktop** (Windows, macOS, Linux)
 
+<p align="center">
+<img src="assets/images/mychat.gif" width="300" alt="MyChat App Demo">
+</p>
+
+
 ##  Technologies Used
 
 ### Frontend
