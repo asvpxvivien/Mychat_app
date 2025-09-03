@@ -1,56 +1,56 @@
-# MyChat - Application de Messagerie Flutter
+# MyChat - Flutter Messaging Application
 
-Une application de messagerie moderne et élégante construite avec Flutter et Firebase, offrant une expérience utilisateur fluide et intuitive.
+A modern and elegant messaging application built with Flutter and Firebase, offering a smooth and intuitive user experience.
 
-## 🚀 Fonctionnalités
+## 🚀 Features
 
-### ✨ Interface Utilisateur
-- **Thème Material 3** avec support clair/sombre automatique
-- **Design moderne** avec bulles de messages stylisées
-- **Police Poppins** pour une typographie élégante
-- **Interface responsive** adaptée à tous les écrans
+### ✨ User Interface
+- **Material 3 Theme** with automatic light/dark support
+- **Modern Design** with styled message bubbles
+- **Poppins Font** for elegant typography
+- **Responsive Interface** adapted to all screens
 
 ### 💬 Chat
-- **Messages en temps réel** via Firestore
-- **Bulles de messages** avec couleurs distinctes (moi/autre)
-- **Read receipts** (✓ envoyé, ✓✓ reçu, ✓✓ lu)
-- **Horodatage** des messages
-- **Scroll automatique** vers le bas après envoi
-- **Validation** des messages vides
+- **Real-time messages** via Firestore
+- **Message bubbles** with distinct colors (me/other)
+- **Read receipts** (✓ sent, ✓✓ delivered, ✓✓ read)
+- **Message timestamps**
+- **Auto-scroll** to bottom after sending
+- **Empty message validation**
 
-### 👤 Profil Utilisateur
-- **Authentification Firebase** (email/mot de passe)
-- **Avatar personnalisable** avec upload vers Firebase Storage
-- **Édition du profil** en temps réel
-- **Gestion des sessions** sécurisée
+### 👤 User Profile
+- **Firebase Authentication** (email/password)
+- **Customizable Avatar** with upload to Firebase Storage
+- **Real-time profile editing**
+- **Secure session management**
 
 ### 🔔 Notifications
-- **Firebase Cloud Messaging (FCM)** configuré
-- **Permissions** automatiques
-- **Token de notification** généré
-- **Prêt pour les notifications push**
+- **Firebase Cloud Messaging (FCM)** configured
+- **Automatic permissions**
+- **Notification token** generated
+- **Ready for push notifications**
 
-### 📱 Multi-plateforme
+### 📱 Multi-platform
 - **Android** (minSdk 23)
 - **iOS** 
 - **Web**
 - **Desktop** (Windows, macOS, Linux)
 
-## 🛠️ Technologies Utilisées
+## 🛠️ Technologies Used
 
 ### Frontend
-- **Flutter 3.7+** - Framework UI cross-platform
-- **Dart** - Langage de programmation
-- **Provider** - Gestion d'état
+- **Flutter 3.7+** - Cross-platform UI framework
+- **Dart** - Programming language
+- **Provider** - State management
 
 ### Backend & Services
-- **Firebase Authentication** - Authentification utilisateur
-- **Cloud Firestore** - Base de données NoSQL temps réel
-- **Firebase Storage** - Stockage des avatars
-- **Firebase Cloud Messaging** - Notifications push
-- **Firebase Core** - Configuration Firebase
+- **Firebase Authentication** - User authentication
+- **Cloud Firestore** - Real-time NoSQL database
+- **Firebase Storage** - Avatar storage
+- **Firebase Cloud Messaging** - Push notifications
+- **Firebase Core** - Firebase configuration
 
-### Dépendances Principales
+### Main Dependencies
 ```yaml
 firebase_core: ^3.13.1
 firebase_auth: ^5.6.0
@@ -61,45 +61,44 @@ image_picker: ^1.1.2
 provider: ^6.1.5
 ```
 
-## 📋 Prérequis
+## 📋 Prerequisites
 
-- **Flutter SDK** 3.7.0 ou supérieur
-- **Dart** 3.0.0 ou supérieur
-- **Android Studio** / **VS Code** avec extensions Flutter
-- **Compte Firebase** avec projet configuré
-- **Android SDK** 23+ (pour le build Android)
+- **Flutter SDK** 3.7.0 or higher
+- **Dart** 3.0.0 or higher
+- **Android Studio** / **VS Code** with Flutter extensions
+- **Firebase account** with configured project
+- **Android SDK** 23+ (for Android build)
 
 ## 🚀 Installation
 
-### 1. Cloner le projet
+### 1. Clone the project
 ```bash
-git clone <url-du-repo>
+git clone <repo-url>
 cd mychat
 ```
 
-### 2. Installer les dépendances
+### 2. Install dependencies
 ```bash
 flutter pub get
 ```
 
-
-### 3. Lancer l'application
+### 3. Launch the application
 ```bash
 flutter run
 ```
 
-## 📱 Structure du Projet
+## 📱 Project Structure
 
 ```
 lib/
-├── controllers/          # Contrôleurs métier
+├── controllers/          # Business controllers
 │   ├── login_controller.dart
 │   └── signup_controller.dart
-├── models/              # Modèles de données
+├── models/              # Data models
 │   └── message.dart
-├── providers/           # Gestion d'état
+├── providers/           # State management
 │   └── userProvider.dart
-├── screens/             # Écrans de l'application
+├── screens/             # Application screens
 │   ├── chatroom_screen.dart
 │   ├── dashboard_screen.dart
 │   ├── edit_profile_screen.dart
@@ -107,6 +106,126 @@ lib/
 │   ├── profile_screen.dart
 │   ├── signup_screen.dart
 │   └── splash_screen.dart
-├── firebase_options.dart # Configuration Firebase
-└── main.dart            # Point d'entrée
+├── firebase_options.dart # Firebase configuration
+└── main.dart            # Entry point
 ```
+
+## 🔧 Configuration
+
+### Environment Variables
+Create a `.env` file at the root:
+```env
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_API_KEY=your-api-key
+```
+
+### Android Configuration
+The `android/app/build.gradle.kts` file is configured with:
+- Core library desugaring enabled
+- minSdk 23 (Firebase compatible)
+- Java 11 support
+
+## 📊 Technical Features
+
+### Message Management
+- **Typed model** with Firestore `withConverter`
+- **Real-time stream** for updates
+- **Client-side validation**
+- **Robust error handling**
+
+### Authentication
+- **Firebase Auth** with email/password
+- **Provider pattern** for state management
+- **Session persistence**
+- **User error handling**
+
+### Storage
+- **Firebase Storage** for avatars
+- **Image compression** (80% quality)
+- **User-based security**
+- **Fallback** to initials if no avatar
+
+## 🚀 Deployment
+
+### Build Android
+```bash
+flutter build apk --release
+```
+
+### Build iOS
+```bash
+flutter build ios --release
+```
+
+### Build Web
+```bash
+flutter build web --release
+```
+
+## 🔒 Security
+
+- **Authentication** required for all operations
+- **Restrictive Firestore rules**
+- **Client and server-side data validation**
+- **Limited user permissions**
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### Android Build Error
+```bash
+# Clean the project
+flutter clean
+flutter pub get
+
+# Check Firebase configuration
+# Check google-services.json in android/app/
+```
+
+#### Messages Not Displaying
+- Check Firestore rules
+- Check internet connection
+- Check Firebase configuration
+
+#### Avatar Upload Failing
+- Check Storage rules
+- Check Android permissions
+- Check image size
+
+## 🤝 Contributing
+
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 TODO
+
+- [ ] **Local notifications** in foreground
+- [ ] **Image upload** in messages
+- [ ] **Emoji picker**
+- [ ] **Voice messages**
+- [ ] **Online status**
+- [ ] **Chat groups**
+- [ ] **Message search**
+- [ ] **Conversation export**
+
+## 📄 License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## 👨‍💻 Author
+
+**Amagb** - Flutter Developer
+
+## 🙏 Acknowledgments
+
+- **Flutter Team** for the framework
+- **Firebase Team** for backend services
+- **Flutter Community** for support
+
+---
+
+⭐ **Don't forget to star the project if you like it!**
