@@ -6,6 +6,7 @@ class UserProvider extends ChangeNotifier {
   String userName = "Dummy Name";
   String userEmail = "Dummy Email";
   String userId = "Dummy userId";
+  String? userAvatarUrl;
 
   var db = FirebaseFirestore.instance;
 
@@ -20,6 +21,7 @@ class UserProvider extends ChangeNotifier {
         var data = docSnapshot.data();
         userName = data?["name"] ?? "";
         userEmail = data?["email"] ?? "";
+        userAvatarUrl = data?["avatarUrl"] as String?;
         userId =
             docSnapshot.id; // 🔥 L’ID est ici, pas dans les champs Firestore
         notifyListeners();

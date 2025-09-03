@@ -3,7 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:mychat/providers/userProvider.dart';
 import 'package:mychat/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +28,13 @@ Future<void> main() async {
     }
   }
 
+  // FCM minimal: demande permission et récupère le token
+  try {
+    await FirebaseMessaging.instance.requestPermission();
+    await FirebaseMessaging.instance.getToken();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  } catch (_) {}
+
   runApp(
     ChangeNotifierProvider(create: (context) => UserProvider(), child: MyApp()),
   );
@@ -42,9 +52,21 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashScreen(),
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        brightness: Brightness.light,
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4),
+          brightness: Brightness.light,
+        ),
+        fontFamily: "Poppins",
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6750A4),
+          brightness: Brightness.dark,
+        ),
         fontFamily: "Poppins",
       ),
     );

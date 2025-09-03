@@ -55,7 +55,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.all(6.0),
             child: CircleAvatar(
               radius: 20,
-              child: Text(userProvider.userName[0]),
+              backgroundImage:
+                  (userProvider.userAvatarUrl != null &&
+                          userProvider.userAvatarUrl!.isNotEmpty)
+                      ? NetworkImage(userProvider.userAvatarUrl!)
+                      : null,
+              child:
+                  (userProvider.userAvatarUrl == null ||
+                          userProvider.userAvatarUrl!.isEmpty)
+                      ? Text(
+                        userProvider.userName.isNotEmpty
+                            ? userProvider.userName[0]
+                            : "?",
+                      )
+                      : null,
             ),
           ),
         ),
@@ -73,7 +86,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   );
                 },
 
-                leading: CircleAvatar(child: Text(userProvider.userName[0])),
+                leading: CircleAvatar(
+                  backgroundImage:
+                      (userProvider.userAvatarUrl != null &&
+                              userProvider.userAvatarUrl!.isNotEmpty)
+                          ? NetworkImage(userProvider.userAvatarUrl!)
+                          : null,
+                  child:
+                      (userProvider.userAvatarUrl == null ||
+                              userProvider.userAvatarUrl!.isEmpty)
+                          ? Text(
+                            userProvider.userName.isNotEmpty
+                                ? userProvider.userName[0]
+                                : "?",
+                          )
+                          : null,
+                ),
                 title: Text(
                   userProvider.userName,
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -122,8 +150,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 MaterialPageRoute(
                   builder:
                       (context) => ChatroomScreen(
-                        ChatroomName: chatroomName,
-                        ChatroomId: chatroomsIds[index],
+                        chatroomName: chatroomName,
+                        chatroomId: chatroomsIds[index],
                       ),
                 ),
               );
@@ -131,7 +159,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             leading: CircleAvatar(
               backgroundColor: Colors.blueGrey[900],
               child: Text(
-                chatroomName[0],
+                chatroomName.isNotEmpty ? chatroomName[0] : "?",
                 style: TextStyle(color: Colors.white),
               ),
             ),

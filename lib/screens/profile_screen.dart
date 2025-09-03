@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mychat/providers/userProvider.dart';
 import 'package:mychat/screens/edit_profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +23,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CircleAvatar(radius: 50, child: Text(userProvider.userName[0])),
+            CircleAvatar(
+              radius: 50,
+              backgroundImage:
+                  (userProvider.userAvatarUrl != null &&
+                          userProvider.userAvatarUrl!.isNotEmpty)
+                      ? NetworkImage(userProvider.userAvatarUrl!)
+                      : null,
+              child:
+                  (userProvider.userAvatarUrl == null ||
+                          userProvider.userAvatarUrl!.isEmpty)
+                      ? Text(
+                        userProvider.userName.isNotEmpty
+                            ? userProvider.userName[0]
+                            : "?",
+                      )
+                      : null,
+            ),
             Text(userProvider.userName),
             SizedBox(height: 8),
             Text(
