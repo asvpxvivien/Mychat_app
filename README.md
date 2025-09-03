@@ -2,9 +2,9 @@
 
 A modern and elegant messaging application built with Flutter and Firebase, offering a smooth and intuitive user experience.
 
-## 🚀 Features
+##  Features
 
-### ✨ User Interface
+###  User Interface
  **Material 3 Theme** with automatic light/dark support
  **Modern Design** with styled message bubbles
  **Poppins Font** for elegant typography
@@ -13,7 +13,7 @@ A modern and elegant messaging application built with Flutter and Firebase, offe
 ###  Chat
  **Real-time messages** via Firestore
  **Message bubbles** with distinct colors (me/other)
- **Read receipts** (✓ sent, ✓✓ delivered, ✓✓ read)
+ **Read receipts** (sent, delivered, read)
  **Message timestamps**
  **Auto-scroll** to bottom after sending
  **Empty message validation**
@@ -61,7 +61,7 @@ image_picker: ^1.1.2
 provider: ^6.1.5
 ```
 
-## 📋 Prerequisites
+##  Prerequisites
 
  **Flutter SDK** 3.7.0 or higher
  **Dart** 3.0.0 or higher
