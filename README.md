@@ -74,7 +74,7 @@ provider: ^6.1.5
  **Firebase account** with configured project
  **Android SDK** 23+ (for Android build)
 
-## 🚀 Installation
+##  Installation
 
 ### 1. Clone the project
 ```bash
